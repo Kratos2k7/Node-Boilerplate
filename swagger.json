@@ -1,0 +1,134 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NodeJS Boilerplate with User Management",
+    "description": "",
+    "version": "1.0"
+  },
+  "produces": ["application/json"],
+  "paths": {
+    "/api/auth/register": {
+      "put": {
+        "tags": ["Public - 4"],
+        "description": "User Registration",
+        "parameters": [
+          { "name": "firstName", "in": "formData", "required": true, "type": "string" },
+          { "name": "lastName", "in": "formData", "required": true, "type": "string" },
+          { "name": "email", "in": "formData", "required": true, "type": "string" },
+          { "name": "password", "in": "formData", "required": true, "type": "string", "minLength": 6 },
+          { "name": "mobile_number", "in": "formData", "required": true, "type": "string", "minLength": 6 }
+        ],
+        "responses": {}
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "tags": ["Public - 4"],
+        "description": "User Login",
+        "parameters": [
+          { "name": "email", "in": "formData", "required": true, "type": "string" },
+          { "name": "password", "in": "formData", "required": true, "type": "string" }
+        ],
+        "responses": {}
+      }
+    },
+    "/api/auth/verify/{token}": {
+      "get": {
+        "tags": ["Public - 4"],
+        "description": "Verify User",
+        "parameters": [{ "name": "token", "in": "path", "required": true }],
+        "responses": {}
+      }
+    },
+    "/api/auth/resend": {
+      "post": {
+        "tags": ["Public - 4"],
+        "description": "Resend Verification Email",
+        "parameters": [{ "name": "email", "in": "formData", "required": true }],
+        "responses": {}
+      }
+    },
+    "/api/auth/validate-token": {
+      "get": {
+        "tags": ["Auth - 2"],
+        "description": "Validate User Token",
+        "parameters": [
+          { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": false }
+        ],
+        "responses": {}
+      }
+    },
+    "/api/auth/refresh": {
+      "post": {
+        "tags": ["Auth - 2"],
+        "description": "Refresh User Token",
+        "parameters": [
+          { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": false }
+        ],
+        "responses": {}
+      }
+    },
+    "/api/user/{userId}": {
+      "get": {
+        "tags": ["User - 1"],
+        "description": "Get User by ID",
+        "parameters": [
+          { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": false },
+          { "name": "userId", "in": "path", "type": "string", "required": true }
+        ],
+        "responses": {}
+      },
+      "put": {
+        "tags": ["User - 1"],
+        "description": "Edit User Info",
+        "parameters": [
+          { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": false },
+          { "name": "userId", "in": "path", "type": "string", "required": true },
+          { "name": "firstName", "in": "formData", "type": "string", "required": false },
+          { "name": "lastName", "in": "formData", "type": "string", "required": false },
+          { "name": "email", "in": "formData", "type": "string", "required": false }
+        ],
+        "responses": {}
+      },
+      "delete": {
+        "tags": ["User - 1"],
+        "description": "Delete User",
+        "parameters": [
+          { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": false },
+          { "name": "userId", "in": "path", "type": "string", "required": true }
+        ],
+        "responses": {}
+      }
+    },
+    "/api/user/": {
+      "get": {
+        "tags": ["User - 1"],
+        "description": "Get All Users (Role-Based)",
+        "parameters": [
+          { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": false }
+        ],
+        "responses": {}
+      }
+    },
+    "/api/moderator/dashboard": {
+      "get": {
+        "tags": ["Moderator - 1"],
+        "description": "Dashboard",
+        "parameters": [
+          { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": false }
+        ],
+        "responses": {}
+      }
+    },
+    "/api/admin/dashboard": {
+      "get": {
+        "tags": ["Admin - 1"],
+        "description": "Dashboard",
+        "parameters": [
+          { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": false }
+        ],
+        "responses": {}
+      }
+    }
+  }
+}
